@@ -1,5 +1,5 @@
 .admin-system-main {
-    background: #E0E5EC;
+    background: #fff;
     min-height: 100vh;
     width: 100%;
 
@@ -151,8 +151,17 @@
                 }
             }
         }
-        // display: flex;
-        // align-items: center;
-        // justify-content: center;
     }
+
+
+    .container-admin {
+        display: grid;
+        // width: 100%;
+        grid-template-columns: 17.5% 75%;
+        gap: 20px;
+        width: 100%;
+        min-height: 100vh;
+        // align-items: center;
+    }
+
 }

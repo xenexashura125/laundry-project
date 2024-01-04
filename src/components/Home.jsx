@@ -4,12 +4,15 @@ import { ScrollTrigger } from 'gsap/all'
 import { Link } from 'react-router-dom'
 import Lenis from '@studio-freight/lenis'
 import Navbar from './navbar/Navbar'
+import { useAuth } from '../context/AuthContext'
 
 const Home = () => {
 
     const ctx = useRef(gsap.context(() => {}))
     const imgRefs = useRef([])
     const textRefs = useRef([])
+
+    const { account } = useAuth()
 
     const [serviceDropdownVisible, setServiceDropdownVisible] = useState(false);
 
@@ -38,7 +41,6 @@ const Home = () => {
     },[])
     
     const handleMouseOver = (m,e) => {
-        console.log(e)
         m.preventDefault()
         gsap.to(textRefs.current[e],{
             "--width":"80%",
@@ -145,11 +147,15 @@ const Home = () => {
                                     <button className='transition-all ease-in-out bg-white hover:bg-blue-400 text-black hover:text-white font-thin py-2 px-4 rounded'>
                                         Book Now!
                                     </button>
+                                    { account?.email && account?.type == 'client' ? 
+                                    <></>
+                                    : 
                                     <button className='transition-all ease-in-out bg-sky-200 hover:bg-sky-300 text-black hover:text-white font-thin py-2 px-4 rounded'>
-                                        <Link to={'/register'}>
-                                            Sign Up
-                                        </Link>
+                                            <Link to={'/register'}>
+                                                Sign Up
+                                            </Link>
                                     </button>
+                                    }
                                 </div>
                             </div>
                         </div>

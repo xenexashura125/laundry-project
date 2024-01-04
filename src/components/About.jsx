@@ -8,7 +8,6 @@ const About = () => {
     const textRefs = useRef([])
 
     const handleMouseOver = (m,e) => {
-        console.log(e)
         m.preventDefault()
         gsap.to(textRefs.current[e],{
             "--width":"80%",

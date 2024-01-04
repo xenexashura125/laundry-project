@@ -6,6 +6,7 @@ import './components/navbar/navbar.scss'
 import Home from './components/Home';
 import './components/home.scss'
 import './admin/admin.scss'
+import './admin/navadmin.scss'
 import './components/auth/auth.scss'
 
 import Lenis from "@studio-freight/lenis";

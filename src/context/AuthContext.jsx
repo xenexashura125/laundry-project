@@ -11,7 +11,8 @@ export const AuthProvider = ({ children }) => {
         lastname: '',
         email: '',
         password: '',
-        contact_no: ''
+        contact_no: '',
+        type:"client"
     });
 
     const [formLogin, setFormLogin] = useState({
@@ -20,7 +21,46 @@ export const AuthProvider = ({ children }) => {
     });
 
     useEffect(() => {
-        
+        const token = localStorage.getItem('userToken')
+        fetch('http://localhost:5000/users/getUserByToken', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ token }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data)
+            if (data.user) {
+                // Hide Login and Register links
+                
+                fetch('http://localhost:5000/users/get-all',{
+                    method:'GET',
+                    headers: {
+                    'Content-Type': 'application/json',
+                },
+                })
+                .then(response => response.json())
+                .then(usersData => {
+                    const loggedInUserEmail = data.user.username;
+
+                    const loggedInUser = usersData.find(user => user.email === loggedInUserEmail);
+
+                    if (loggedInUser) {
+                        setAccount(loggedInUser)
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+                localStorage.setItem('userToken', token);
+            }
+        })
+        .catch(error => {
+                console.error(error);
+        });
+
     },[])
 
 
